@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Function to run Django app
+      function runDjangoApp() {
+        const { exec } = require('child_process');
+
+        // Define the command to run the Django app
+        const command = 'python manage.py runserver';
+
+        // Execute the command
+        exec(command, (error, stdout, stderr) => {
+          if (error) {
+            console.error(`Error: ${error.message}`);
+            return;
+          }
+          if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return;
+          }
+          console.log(`stdout: ${stdout}`);
+        });
+      }
+
+      // Run Django app when the page is loaded
+      runDjangoApp();
+
+      // Redirect to another page after a delay
+      setTimeout(function() {
+        window.location.href = "/new-page";
+      }, 5000); // 5 seconds delay
+    });
+  </script>
+</head>
+<body>
+  <p>Running Django app...</p>
+  <p>Redirecting to a new page in 5 seconds...</p>
+</body>
+</html>
+
